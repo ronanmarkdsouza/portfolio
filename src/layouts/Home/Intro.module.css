@@ -139,6 +139,7 @@
   color: rgb(var(--rgbText) / 0);
   transition: opacity 0.5s ease var(--durationM);
   isolation: isolate;
+  white-space: nowrap;
 
   &::after {
     content: '';

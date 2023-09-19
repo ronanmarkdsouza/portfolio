@@ -14,6 +14,7 @@ import { useFormInput } from 'hooks';
 import { useRef, useState } from 'react';
 import { cssProps, msToNum, numToMs } from 'utils/style';
 import styles from './Contact.module.css';
+import * as emailjs from 'emailjs-com';
 
 export const Contact = () => {
   const errorRef = useRef();
@@ -24,36 +25,46 @@ export const Contact = () => {
   const [statusError, setStatusError] = useState('');
   const initDelay = tokens.base.durationS;
 
+  const contactConfig = {
+    YOUR_EMAIL: 'ronanmarkdsouza@proton.me',
+    YOUR_FONE: '+91 9538011262',
+    description: '',
+
+    YOUR_SERVICE_ID: 'service_kiz0fcj',
+    YOUR_TEMPLATE_ID: 'template_mb13dir',
+    YOUR_USER_ID: 'daD3uKH1DsMP0K495',
+  };
+
   const onSubmit = async event => {
     event.preventDefault();
     setStatusError('');
 
+    const templateParams = {
+      from_name: email.value,
+      user_name: 'Ronan',
+      to_name: contactConfig.YOUR_EMAIL,
+      message: message.value,
+    };
     if (sending) return;
 
     try {
       setSending(true);
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/message`, {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: email.value,
-          message: message.value,
-        }),
-      });
-
-      const responseMessage = await response.json();
-
-      const statusError = getStatusError({
-        status: response?.status,
-        errorMessage: responseMessage?.error,
-        fallback: 'There was a problem sending your message',
-      });
-
-      if (statusError) throw new Error(statusError);
+      emailjs
+        .send(
+          contactConfig.YOUR_SERVICE_ID,
+          contactConfig.YOUR_TEMPLATE_ID,
+          templateParams,
+          contactConfig.YOUR_USER_ID
+        )
+        .then(
+          function (response) {
+            console.log('SUCCESS!', response.status, response.text);
+          },
+          function (error) {
+            console.log('FAILED...', error);
+          }
+        );
 
       setComplete(true);
       setSending(false);

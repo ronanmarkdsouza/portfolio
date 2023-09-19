@@ -1,5 +1,5 @@
 import notFoundPoster from 'assets/notfound.jpg';
-import notFoundVideo from 'assets/notfound.mp4';
+import notFoundVideo from 'assets/not-found.mp4';
 import { Button } from 'components/Button';
 import { DecoderText } from 'components/DecoderText';
 import { Heading } from 'components/Heading';
@@ -39,9 +39,9 @@ export function Page404() {
                   <DecoderText text="Error: Redacted" start={visible} delay={300} />
                 </Heading>
                 <Text className={styles.description} data-visible={visible} as="p">
-                  This page could not be found. It either doesn’t exist or was deleted. Or
-                  perhaps you don’t exist.
+                  अरे कौन देवी प्रसाद? वो तो चल बसे, कुछ बोलना था?
                 </Text>
+
                 <Button
                   secondary
                   iconHoverShift
@@ -70,11 +70,11 @@ export function Page404() {
               <a
                 className={styles.credit}
                 data-visible={visible}
-                href="https://www.imdb.com/title/tt0113568/"
+                href="https://www.imdb.com/title/tt0242519/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Animation from Ghost in the Shell (1995)
+                Hera Pheri (2000)
               </a>
             </div>
           </Fragment>

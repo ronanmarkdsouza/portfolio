@@ -33,7 +33,7 @@ const ArticlesPost = ({
   useEffect(() => {
     setDateTime(formatDate(date));
   }, [date, dateTime]);
-  
+
   const handleMouseEnter = () => {
     setHovered(true);
   };
@@ -65,33 +65,33 @@ const ArticlesPost = ({
           />
         </div>
       )}
-      <RouterLink href={`/articles/${slug}`} scroll={false}>
-        <a
-          className={styles.postLink}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
-          <div className={styles.postDetails}>
-            <div aria-hidden className={styles.postDate}>
-              <Divider notchWidth="64px" notchHeight="8px" />
-              {dateTime}
-            </div>
-            <Heading as="h2" level={featured ? 2 : 4}>
-              {title}
-            </Heading>
-            <Text size={featured ? 'l' : 's'} as="p">
-              {abstract}
-            </Text>
-            <div className={styles.postFooter}>
-              <Button secondary iconHoverShift icon="chevronRight" as="div">
-                Read article
-              </Button>
-              <Text className={styles.timecode} size="s">
-                {timecode}
-              </Text>
-            </div>
+      <RouterLink
+        href={`/articles/${slug}`}
+        scroll={false}
+        className={styles.postLink}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        <div className={styles.postDetails}>
+          <div aria-hidden className={styles.postDate}>
+            <Divider notchWidth="64px" notchHeight="8px" />
+            {dateTime}
           </div>
-        </a>
+          <Heading as="h2" level={featured ? 2 : 4}>
+            {title}
+          </Heading>
+          <Text size={featured ? 'l' : 's'} as="p">
+            {abstract}
+          </Text>
+          <div className={styles.postFooter}>
+            <Button secondary iconHoverShift icon="chevronRight" as="div">
+              Read article
+            </Button>
+            <Text className={styles.timecode} size="s">
+              {timecode}
+            </Text>
+          </div>
+        </div>
       </RouterLink>
       {featured && (
         <Text aria-hidden className={styles.postTag} size="s">
@@ -173,10 +173,7 @@ export const Articles = ({ posts, featured }) => {
 
   return (
     <article className={styles.articles}>
-      <Meta
-        title="Articles"
-        description="A collection of technical design and development articles. May contain incoherent ramblings."
-      />
+      <Meta title="Articles" description="A collection of blogs and articles." />
       <Section className={styles.content}>
         {!isSingleColumn && (
           <div className={styles.grid}>
